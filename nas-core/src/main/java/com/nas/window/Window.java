@@ -8,15 +8,22 @@ public class Window {
     private int width, height;
     private String title;
 
+    private boolean closed;
+    private double fps_cap, time, processedTime = 0;
+
     private long window;
 
-    public Window(int width, int height, String title) {
+    public Window(int width, int height, int fps, String title) {
         this.width = width;
         this.height = height;
         this.title = title;
+
+        this.fps_cap = fps;
     }
 
     public void init() {
+        closed = false;
+
         if(!glfwInit()) {
             throw new RuntimeException("ERROR: glfw could not be initialized");
         }
@@ -40,7 +47,31 @@ public class Window {
         glfwSwapBuffers(window);
     }
 
+    public double getTime() {
+        return (double) System.nanoTime() / (double) 1000000000;
+    }
+
     public boolean closed() {
         return glfwWindowShouldClose(window);
+    }
+
+    public void stop() {
+        glfwTerminate();
+        closed = true;
+    }
+
+    public boolean isUpdating() {
+        if (!closed) {
+            double nextTime = getTime();
+            double passedTime = nextTime - time;
+            processedTime += passedTime;
+            time = nextTime;
+
+            while (processedTime > 1.0/fps_cap) {
+                processedTime -= 1.0/fps_cap;
+                return true;
+            }
+        }
+        return false;
     }
 }
