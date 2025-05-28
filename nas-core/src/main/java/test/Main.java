@@ -6,6 +6,14 @@ import com.nas.scene.Scene;
 import com.nas.utils.Nastal;
 import com.nas.window.Window;
 
+/**
+ * I made this project using Vulkan and lwjgl3
+ * To initialize the projects you go to void init and initialize whatever you want
+ * If you want to code any game logic create a logic script
+ *
+ * @author mendwas
+ */
+
 public class Main implements BasicApplication {
     public static void main(String[] args) {
         Main app = new Main();
@@ -25,11 +33,6 @@ public class Main implements BasicApplication {
 
     @Override
     public void render(Scene scene, Render render) {
-
-    }
-
-    @Override
-    public void input(Window window, Scene scene) {
 
     }
 }

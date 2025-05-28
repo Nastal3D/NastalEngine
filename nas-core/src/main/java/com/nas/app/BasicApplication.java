@@ -18,6 +18,4 @@ public interface BasicApplication {
     public void update(Window window, Scene scene, Render render);
 
     public void render(Scene scene, Render render);
-
-    public void input(Window window, Scene scene);
 }
