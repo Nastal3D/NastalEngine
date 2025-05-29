@@ -18,6 +18,7 @@ public class Nastal {
         this.application = application;
         window = new Window(width, height, fps, title);
         window.init();
+        window.initVulkan();
     }
 
     public void start() {
